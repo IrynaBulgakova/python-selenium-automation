@@ -14,3 +14,12 @@ Feature: Target.com empty cart
     When Click from navigation menu on Sign In
     Then Verify Sign In form opened
 
+
+    Scenario: User can add product to cart
+      Given Open Target.com
+      When Search for Tumbler
+      When Click on Add to Cart button
+      When Click from navigation menu on Add to Cart button
+      When Open cart page
+      Then Verify that cart has 1 item(s)
+
