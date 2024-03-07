@@ -11,20 +11,18 @@ NAV_MENU_SIGN_IN = (By.CSS_SELECTOR, '[data-test="accountNav-signIn"]')
 
 @given('Open Target.com')
 def open_target_page(context):
-    context.driver.get('https://www.target.com/')
+    context.app.main_page.open_main()
 
 
 @when('Click on cart icon')
 def click_on_icon(context):
-    context.wait.until(EC.presence_of_element_located(CART_ICON)).click()
+    context.app.header.click_on_icon()
     # context.driver.find_element(*CART_ICON).click()
 
 
 @then('Message Your cart is empty is shown')
 def verify_message_is_shown(context):
-    actual_text = context.driver.find_element(By.XPATH, '//div[@data-test="boxEmptyMsg"]').text
-    assert "Your cart is empty" in actual_text, f'Message "Your cart is empty" not in {actual_text}'
-    print('Test case passed')
+    context.app.cart_page.verify_message_is_shown()
 
 
 @when('Click Sign In')

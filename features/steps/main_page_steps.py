@@ -5,6 +5,9 @@ from time import sleep
 BENEFIT_BOXES = (By.CSS_SELECTOR, "li[class*='styles__BenefitCard']")
 ADD_TO_CART_BTN = (By.CSS_SELECTOR, '[id*="addToCartButton"]')
 NAV_MENU_ADD_TO_CART_BTN = (By.CSS_SELECTOR, '[data-test="orderPickupButton"]')
+SEARCH_FIELD = (By.ID, 'search')
+SEARCH_ICON = (By.CSS_SELECTOR, '[data-test*="SearchButton"]')
+SEARCH_RESULTS_HEADER = (By.CSS_SELECTOR, '[data-test="resultsHeading"]')
 
 
 @given('Open Target Circle page')
@@ -21,15 +24,12 @@ def verify_benefit_boxes(context, expected_amount):
 
 @when('Search for {product}')
 def search_product(context, product):
-    context.driver.find_element(By.ID, 'search').send_keys(product)
-    context.driver.find_element(By.CSS_SELECTOR, '[data-test*="SearchButton"]').click()
-    sleep(6)
+    context.app.header.search_product(product)
 
 
 @then('Search results for {expected_result} are shown')
 def search_results(context, expected_result):
-    actual_text = context.driver.find_element(By.CSS_SELECTOR, '[data-test="resultsHeading"]').text
-    assert expected_result in actual_text, f"Expected {expected_result} is not in {actual_text}"
+    context.app.search_results_page.search_results(expected_result)
 
 
 @when('Click on Add to Cart button')
