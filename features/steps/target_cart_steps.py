@@ -27,19 +27,19 @@ def verify_message_is_shown(context):
 
 @when('Click Sign In')
 def click_sign_in(context):
-    context.wait.until(EC.visibility_of_element_located(SIGN_IN_ICON)).click()
+    context.app.header.click_sign_in()
     # context.driver.find_element(*SIGN_IN_ICON).click()
     # sleep(2)
 
 
 @when('Click from navigation menu on Sign In')
 def click_from_navigation_menu_sign_in(context):
-    context.wait.until(EC.presence_of_element_located(NAV_MENU_SIGN_IN)).click()
+    context.app.side_navigation_page.click_from_navigation_menu_sign_in()
     # context.driver.find_element(*NAV_MENU_SIGN_IN).click()
     # sleep(2)
 
 
 @then('Verify Sign In form opened')
 def verify_sign_in(context):
-    context.driver.find_element(By.CSS_SELECTOR, '#username')
+    context.app.log_in_page.verify_sign_in()
     print('Sign In form opened')

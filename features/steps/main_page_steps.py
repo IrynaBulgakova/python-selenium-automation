@@ -34,13 +34,12 @@ def search_results(context, expected_result):
 
 @when('Click on Add to Cart button')
 def click_add_to_cart(context):
-    context.driver.find_element(*ADD_TO_CART_BTN).click()
+    context.app.main_page.click_add_to_cart()
 
 
 @when('Click from navigation menu on Add to Cart button')
 def click_nav_menu_add_to_cart(context):
-    context.driver.find_element(*NAV_MENU_ADD_TO_CART_BTN).click()
-    sleep(3)
+    context.app.side_navigation_page.click_nav_menu_add_to_cart()
 
 
 
